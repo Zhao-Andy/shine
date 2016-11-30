@@ -1,24 +1,7 @@
-# README
+# Shine Dashboard App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+An AngularJS and Ruby on Rails dashboard app based on David Bryant Copeland's book, [*Rails, Angular, Postgresql, and Bootstrap: Second Edition*](https://pragprog.com/book/dcbang2/rails-angular-postgres-and-bootstrap-second-edition).
 
-Things you may want to cover:
+This app is strictly for learning purposes, and I highly advise that you buy Copeland's book as mentioned above if you want to follow this example app.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Unlike my other app [helperhood](https://github.com/Zhao-Andy/helperhood) which has Angular and Bootstrap served via Rails' asset pipeline, Shine has Angular and Bootstrap served up via Webpack and managed using NPM.
