@@ -20,7 +20,8 @@ feature "angular test" do
     click_button "Log in"
 
     # Check that we go to the right page
-    expect(page).to have_content("Angular Test")
+    # puts page.html
+    expect(page).to have_content("Name")
 
     # Test the page
     fill_in "name", with: "Pat"
