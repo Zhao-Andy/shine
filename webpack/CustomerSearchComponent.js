@@ -5,40 +5,7 @@ http: require("@angular/http")
 };
 var CustomerSearchComponent = ng.core.Component({
   selector: "shine-customer-search",
-  template: '\
-  <header> \
-    <h1 class="h2">Customer Search</h1> \
-  </header> \
-  <section class="search-form"> \
-    <form> \
-      <label for="keywords" class="sr-only">Keywords</label> \
-        <input type="text" id="keywords" name="keywords" \
-               placeholder="First Name, Last Name, or Email Address"\
-               bind-ngModel="keywords" \
-               on-ngModelChange="search($event)" \
-               class="form-control input-lg" > \
-    </form> \
-  </section> \
-  <section class="search-results" *ngIf="customers"> \
-    <header> \
-      <h1 class="h3">Results</h1> \
-    </header> \
-    <ol class="list-group"> \
-      <li *ngFor="let customer of customers" \
-          class="list-group-item clearfix"> \
-        <h3 class="pull-right"> \
-          <small class="text-uppercase">Joined</small> \
-          {{customer.created_at}} \
-        </h3> \
-        <h2 class="h3"> \
-          {{customer.first_name}} {{customer.last_name}} \
-          <small>{{customer.username}}</small> \
-        </h2> \
-        <h4>{{customer.email}}</h4> \
-      </li> \
-    </ol> \
-</section> \
-'
+  template: require("./CustomerSearchComponent.html")
 }).Class({
   constructor: [
     ng.http.Http,
