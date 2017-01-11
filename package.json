@@ -12,6 +12,7 @@
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "bootstrap": "3.3.7",
+    "raw-loader": "0.5.1",
     "@angular/common": "~2.1.0",
     "@angular/compiler": "~2.1.0",
     "@angular/core": "~2.1.0",
@@ -29,6 +30,7 @@
   "devDependencies": {
     "jasmine": "2.4.0",
     "jasmine-node": "1.11.0",
-    "testdouble": "1.6.0"
+    "testdouble": "1.6.0",
+    "proxyquire": "1.7.10"
   }
 }
