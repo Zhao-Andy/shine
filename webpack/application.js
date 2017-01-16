@@ -14,6 +14,24 @@ var ng                  = {
   http:                   require("@angular/http")
 };
 
+var CustomerAppComponent = require("./CustomerAppComponent");
+var CustomerSearchComponent = require("./CustomerSearchComponent");
+var CustomerDetailsComponent = require("./CustomerDetailsComponent");
+
+var routing = ng.router.RouterModule.forRoot(
+  [
+    {
+      path: "",
+      component: CustomerSearchComponent
+    },
+    {
+      path: ":id",
+      component: CustomerDetailsComponent
+    }
+  ]
+);
+
+
 var AngularTestComponent = ng.core.Component({
   selector: "shine-angular-test",
   template: '\
@@ -50,16 +68,20 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-var CustomerSearchComponent = require("./CustomerSearchComponent")
 
 var CustomerSearchAppModule = ng.core.NgModule({
   imports: [
     ng.platformBrowser.BrowserModule,
     ng.forms.FormsModule,
-    ng.http.HttpModule
+    ng.http.HttpModule,
+    routing
   ],
-  declarations: [ CustomerSearchComponent ],
-  bootstrap: [ CustomerSearchComponent ]
+  declarations: [
+    CustomerSearchComponent,
+    CustomerDetailsComponent,
+    CustomerAppComponent
+  ],
+  bootstrap: [ CustomerAppComponent ]
 })
 .Class({
   constructor: function() {}

@@ -1,7 +1,8 @@
 var reflectMetadata = require("reflect-metadata");
 var ng = {
-core: require("@angular/core"),
-http: require("@angular/http")
+core:   require("@angular/core"),
+http:   require("@angular/http"),
+router: require("@angular/router")
 };
 var CustomerSearchComponent = ng.core.Component({
   selector: "shine-customer-search",
@@ -9,8 +10,10 @@ var CustomerSearchComponent = ng.core.Component({
 }).Class({
   constructor: [
     ng.http.Http,
-    function(http) {
+    ng.router.Router,
+    function(http, router) {
       this.http      = http;
+      this.router    = router;
       this.customers = null;
       this.keywords  = "";
     }
@@ -31,6 +34,9 @@ var CustomerSearchComponent = ng.core.Component({
         window.alert(response);
       }
     );
+  },
+  viewDetails: function(customer) {
+    this.router.navigate(["/", customer.id]);
   }
 });
 module.exports = CustomerSearchComponent;
