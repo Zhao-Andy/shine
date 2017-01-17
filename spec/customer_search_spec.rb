@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 feature 'Customer Search' do
-  def create_customer(first_name,
-                      last_name,
+  def create_customer(first_name:,
+                      last_name:,
                       email: nil)
     username = "#{Faker::Internet.user_name}#{rand(1000)}"
     email ||=  "#{username}#{rand(1000)}@" +
@@ -10,14 +10,15 @@ feature 'Customer Search' do
 
     Customer.create!(
       first_name: first_name,
-      last_name: last_name,
-      username: username,
-      email: email
+       last_name: last_name,
+        username: username,
+           email: email
     )
   end
 
-  let(:email)     { "pat@example.com" }
+  let(:email)     { "pat@ex.com" }
   let(:password)  { "password123" }
+
 
   before do
     User.create!(
@@ -42,37 +43,44 @@ feature 'Customer Search' do
     click_button 'Log in'
   end
 
-  scenario "test working" do
-    expect(:email).to eq("pat@example.com")
+  scenario "Search by Name" do
+    within "section.search-form" do
+      fill_in "keywords", with: "pat"
+    end
+    within "section.search-results" do
+      expect(page).to have_content("Results")
+      expect(page.all("ol li.list-group-item").count).to eq(4)
+      expect(page.all("ol li.list-group-item")[0]).to have_content("Patricia")
+      expect(page.all("ol li.list-group-item")[0]).to have_content("Dobbs")
+      expect(page.all("ol li.list-group-item")[3]).to have_content("I.T.")
+      expect(page.all("ol li.list-group-item")[3]).to have_content("Pat")
+    end
   end
-  #
-  # scenario "Search by Name" do
-  #   within "section.search-form" do
-  #     fill_in "keywords", with: "pat"
-  #   end
-  #   within "section.search-results" do
-  #     expect(page).to have_content("Results")
-  #     expect(page.all("ol li.list-group-item").count).to eq(4)
-  #     expect(page.all("ol li.list-group-item")[0]).to have_content("Patricia")
-  #     expect(page.all("ol li.list-group-item")[0]).to have_content("Dobbs")
-  #     expect(page.all("ol li.list-group-item")[3]).to have_content("I.T.")
-  #     expect(page.all("ol li.list-group-item")[3]).to have_content("Pat")
-  #   end
-  # end
-  #
-  # scenario "Search by Email" do
-  #   within "section.search-form" do
-  #     fill_in "keywords", with: "pat123@somewhere.net"
-  #   end
-  #   within "section.search-results" do
-  #     expect(page).to have_content("Results")
-  #     expect(page.all("ol li.list-group-item").count).to eq(4)
-  #     expect(page.all("ol li.list-group-item")[0]).to have_content("Pat")
-  #     expect(page.all("ol li.list-group-item")[0]).to have_content("Jones")
-  #     expect(page.all("ol li.list-group-item")[1]).to have_content("Patricia")
-  #     expect(page.all("ol li.list-group-item")[1]).to have_content("Dobbs")
-  #     expect(page.all("ol li.list-group-item")[3]).to have_content("I.T.")
-  #     expect(page.all("ol li.list-group-item")[3]).to have_content("Pat")
-  #   end
-  # end
+
+  scenario "Search by Email" do
+    within "section.search-form" do
+      fill_in "keywords", with: "pat123@somewhere.net"
+    end
+    within "section.search-results" do
+      expect(page).to have_content("Results")
+      expect(page.all("ol li.list-group-item").count).to eq(4)
+      expect(page.all("ol li.list-group-item")[0]).to have_content("Pat")
+      expect(page.all("ol li.list-group-item")[0]).to have_content("Jones")
+      expect(page.all("ol li.list-group-item")[1]).to have_content("Patricia")
+      expect(page.all("ol li.list-group-item")[1]).to have_content("Dobbs")
+      expect(page.all("ol li.list-group-item")[3]).to have_content("I.T.")
+      expect(page.all("ol li.list-group-item")[3]).to have_content("Pat")
+    end
+
+    click_on "View Details...", match: :first
+
+    customer = Customer.find_by!(email: "pat123@somewhere.net")
+    within "section.customer-details" do
+      expect(page).to have_content(customer.id)
+      expect(page).to have_content(customer.first_name)
+      expect(page).to have_content(customer.last_name)
+      expect(page).to have_content(customer.email)
+      expect(page).to have_content(customer.username)
+    end
+  end
 end
