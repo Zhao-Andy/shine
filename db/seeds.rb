@@ -23,7 +23,6 @@ def create_shipping_address(customer_id,state,is_primary)
   CustomersShippingAddress.create!(customer_id: customer_id,
                                        address: shipping_address,
                                        primary: is_primary)
-
 end
 
 # Cache the number of states so we don't have to query
