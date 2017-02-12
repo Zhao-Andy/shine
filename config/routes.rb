@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   get 'customers/ng/*angular_route', to: 'customers#ng'
   resources :customers, only: [ :index, :show ]
   get 'angular_test' => 'angular_test#index'
+  get 'credit_card_info/:id', to: 'fake_payment_processor#show'
 end
