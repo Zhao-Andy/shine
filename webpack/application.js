@@ -20,6 +20,7 @@ var CustomerDetailsComponent = require("./CustomerDetailsComponent");
 var CustomerInfoComponent = require("./CustomerInfoComponent");
 var CustomerAddressComponent = require("./CustomerAddressComponent");
 var CreditCardComponent = require("./CreditCardComponent");
+var TextFieldComponent = require("./TextFieldComponent");
 
 var routing = ng.router.RouterModule.forRoot(
   [
@@ -85,6 +86,7 @@ var CustomerSearchAppModule = ng.core.NgModule({
     CustomerInfoComponent,
     CustomerAddressComponent,
     CreditCardComponent,
+    TextFieldComponent,
     CustomerAppComponent
   ],
   bootstrap: [ CustomerAppComponent ]
