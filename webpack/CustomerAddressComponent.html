@@ -6,6 +6,7 @@
 <shine-text-field
   bind-object="address"
   field_name="street"
+  on-valueChanged="save($event)"
   label="Street Address">
 </shine-text-field>
 <div class="row">
@@ -13,7 +14,9 @@
     <shine-text-field
       bind-object="address"
       field_name="city"
-      label="City">
+      on-valueChanged="save($event)"
+      label="City"
+      >
     </shine-text-field>
   </div>
   <div class="col-md-2">
@@ -21,6 +24,7 @@
       bind-object="address"
       field_name="state"
       compact="true"
+      on-valueChanged="save($event)"
       label="State">
     </shine-text-field>
   </div>
@@ -29,6 +33,7 @@
       bind-object="address"
       field_name="zipcode"
       pattern="\d\d\d\d\d(-\d\d\d\d)?"
+      on-valueChanged="save($event)"
       label="Zip Code">
     </shine-text-field>
   </div>

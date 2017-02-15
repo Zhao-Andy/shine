@@ -2,11 +2,16 @@
   <form>
     <div class="row">
       <div class="col-md-6">
-        <shine-customer-info bind-customer="customer">
+        <shine-customer-info
+        bind-customer="customer"
+        on-customerInfoChanged="saveCustomer($event)"
+        >
         </shine-customer-info>
         <shine-customer-address
           type="Shipping"
-          bind-address="customer.shipping_address">
+          bind-address="customer.shipping_address"
+          on-addressChanged="saveShippingAddress($event)"
+          >
         </shine-customer-address>
       </div>
       <div class="col-md-6">
@@ -22,7 +27,9 @@
           <hr>
           <shine-customer-address
           type="Billing"
-          bind-address="customer.billing_address">
+          bind-address="customer.billing_address"
+          on-addressChanged="saveBillingAddress($event)"
+          >
         </shine-customer-address>
           </section>
         </article>
@@ -30,12 +37,3 @@
     </div>
   </form>
 </section>
-
-<!-- <h1>Customer Details {{customer.id}}</h1>
-<h2>{{customer.first_name}} {{customer.last_name}}</h2>
-<h3>{{customer.email}}</h3>
-<h4>{{customer.username}}</h4>
-<h5>
-  <small class="text-uppercase">Joined</small>
-  {{customer.created_at}}
-</h5> -->

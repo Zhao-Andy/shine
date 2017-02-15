@@ -15,6 +15,7 @@
            bind-pattern="validationPattern()"
            bindon-ngModel="object[field_name]"
            ref-model="ngModel"
+           on-blur="blur(model)"
     >
   </div>
   <aside *ngIf="!compact && !modelValid(model)"

@@ -12,6 +12,9 @@ var TextFieldComponent = ng.core.Component({
     "addon",
     "pattern",
     "compact"
+  ],
+  outputs: [
+    "valueChanged"
   ]
 }).Class({
   constructor: [
@@ -22,6 +25,7 @@ var TextFieldComponent = ng.core.Component({
       this.addon      = null;
       this.pattern    = null;
       this.compact    = false;
+      this.valueChanged = new ng.core.EventEmitter();
     }
   ],
   modelValid: function(model) {
@@ -33,6 +37,25 @@ var TextFieldComponent = ng.core.Component({
     }
     else {
       return "^.*$";
+    }
+  },
+  ngOnInit: function() {
+    if (this.object && this.field_name) {
+      this.originalValue = this.object[this.field_name];
+    }
+    else {
+      this.originalValue = null;
+    }
+  },
+  blur: function(model) {
+    if (this.modelValid(model)) {
+      if (this.originalValue != model.value) {
+        this.valueChanged.emit({
+          field_name: this.field_name,
+          value: model.value
+        });
+        this.originalValue = model.value;
+      }
     }
   }
 });
